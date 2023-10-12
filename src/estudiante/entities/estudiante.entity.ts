@@ -1,6 +1,8 @@
 import { IsDate } from 'class-validator';
 import { type } from 'os';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Ciudad } from 'src/ciudad/entities/ciudad.entity';
+import { Clase } from 'src/clase/entities/clase.entity';
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'estudiante' })
 export class Estudiante {
@@ -16,6 +18,13 @@ export class Estudiante {
   @Column()
   @IsDate()
   fecha_nacimiento: Date;
+//*** Relación entre Clase y Estudiante-> muchos a muchos */
+@ManyToMany(()=>Clase,clases=>clases.estudiantes)
+clases:Clase[]; // arreglo de clases 
+
+//***Relación entre Estudiante y Ciudad -> muchos a muchos */
+@ManyToMany(()=>Ciudad,ciudades=>ciudades.estudiantes)
+ciudad:Ciudad[];
 
   constructor(nombre: string, apellido: string, fecha_nacimiento: Date) {
     this.nombre = nombre;

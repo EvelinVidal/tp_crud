@@ -16,7 +16,7 @@ import { EscuelaModule } from './escuela/escuela.module';
       "port":3306,
       "username":"root",
       "password":"Misql8",
-      "database":"colegio",
+      "database":"colegioDB",
       "entities":["dist/**/**.entity{.ts,.js}"],
       "synchronize":true}),
     CiudadModule,
