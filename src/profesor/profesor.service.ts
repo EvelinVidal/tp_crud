@@ -17,7 +17,7 @@ export class ProfesorService {
     private readonly ciudadProfesorRepository: Repository<Ciudad_profesor>,
   ) {}
 
-  //** CREATE */
+  //**   CREATE   */
   async create(CreateProfesorDto: CreateProfesorDto): Promise<boolean> {
     try {
       let profesor: Profesor = await this.ciudadRepository.save(
@@ -36,7 +36,7 @@ export class ProfesorService {
     }
   }
 
-  /** CREATE DOMICILIO, método delegado por Ciudad_profesor */
+  /**    CREATE DOMICILIO, método delegado por Ciudad_profesor    */
   async createDomicilio(body) {
     // verifico si existe el profesor:
     const { ciudadId, profesorId, domicilio } = body;
@@ -65,12 +65,12 @@ export class ProfesorService {
     ); // si no existe el dom guardamos el nuevo, datos provenientes del body. El constructor de ciudad_profesor recibe estos 3 parámetros para la creación.
   }
 
-  //** READ  */
+  //**    READ    */
   async findAll() {
     return await this.profesorRepository.find();
   }
 
-  //** UPDATE */
+  //**    UPDATE    */
   async update(
     CreateProfesorDto: CreateProfesorDto,
     id: number,
@@ -90,7 +90,7 @@ export class ProfesorService {
     }
   }
 
-  //** DELETE  */
+  //**    DELETE    */
   async remove(id: number): Promise<any> {
     try {
       const findProfesor: FindOneOptions = { where: { id: id } };

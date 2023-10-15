@@ -17,7 +17,7 @@ export class EstudianteService {
     private estudianteClaseRepository: Repository<EstudianteClase>,
   ) {}
 
-  //** CREATE */
+  //**    CREATE   */
   async create(estudianteDto: EstudianteDto) {
     // const fechaActual = new Date() -> puedo obtener la fecha actual y usarla como parametro en la creación de estudiante. new Estudiante (..., fechaActual)
     // const estudiante=new Estudiante(estudianteDto.nombre, estudianteDto.apellido, estudianteDto.fecha_nacimiento)
@@ -66,13 +66,13 @@ export class EstudianteService {
     );
   }
 
-  //** FIND ALL */
+  //**    READ    */
   async findAll(): Promise<any> {
     return await this.estudianteRepository.find();
   }
 
   
-  //**UPDATE  */
+  //**   UPDATE   */
 
   async update(EstudianteDto: EstudianteDto, id: number): Promise<string> {
     const findEstudiante: FindOneOptions = { where: { id: id } };
@@ -89,7 +89,7 @@ export class EstudianteService {
     }
   }
 
-  //** REMOVE */
+  //**   DELETE   */
   async remove(id: number) {
     try {
       const aux: FindOneOptions = { where: { id: id } };
