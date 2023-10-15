@@ -25,7 +25,7 @@ export class EscuelaController {
   }
 
 //**   DELETE    */
-  @Delete(':id')
+  @Delete('eliminar/:id')
   remove(@Param('id') id: number) {
     return this.escuelaService.remove(id);
   }

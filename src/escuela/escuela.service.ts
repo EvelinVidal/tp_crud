@@ -12,11 +12,12 @@ export class EscuelaService {
   ) {}
 
   //**   CREATE    */
-  async create(escuelaDto:EscuelaDto): Promise<boolean> {
+  async create(EscuelaDto:EscuelaDto): Promise<boolean> {
     try {
-      let guardarEscuela: Escuela = await this.escuelaRepository.save(
-        new Escuela(escuelaDto.domicilio, escuelaDto.nombre));
-      if (guardarEscuela) return true;
+
+      let escuela: Escuela = await this.escuelaRepository.save(
+        new Escuela(EscuelaDto.nombre, EscuelaDto.nombre));
+      if (escuela) return true;
       else throw new Error('no se pudo crear la escuela');
     } catch (error) {
       throw new HttpException(
@@ -33,6 +34,7 @@ export class EscuelaService {
   async findAll(): Promise<any> {
     return await this.escuelaRepository.find();
   }
+
   //**   UPDATE    */
   async update(id: number, EscuelaDto: EscuelaDto): Promise<string> {
     const findEscuelaById: FindOneOptions = { where: { id: id } };
@@ -47,7 +49,7 @@ export class EscuelaService {
       escuela.setNombre(EscuelaDto.nombre);
       escuela.setDomicilio(EscuelaDto.domicilio);
       escuela = await this.escuelaRepository.save(escuela);
-      return `datos actualizados - ${nombreAnterior} - ${direccionAnterior}---> ${EscuelaDto.nombre}`;
+      return `datos actualizados - ${nombreAnterior} - ${direccionAnterior}---> nuevos datos: ${EscuelaDto.nombre} ${EscuelaDto.domicilio}`;
     }
   }
   //**   DELETE    */

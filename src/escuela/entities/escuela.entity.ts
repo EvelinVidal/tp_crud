@@ -13,10 +13,21 @@ export class Escuela {
   @Column()
   domicilio: string;
 
+// relación entre escuela y ciudad -> muchos a uno
+
+@ManyToOne(()=>Ciudad,ciudad=>ciudad.escuelas) // referencia a escuelas. Muchas escuelas pueden referenciar un elemento de ciudad
+@JoinColumn({name: "id_ciudad"}) // esto es opcional, es para definir el nombre del atributo FK en la tabla que lo crea, en este caso Escuela contiene id ciudad como FK. 
+ciudad:Ciudad;   // propiedad que permite la conexion entre tablas, tamb permite acceder al array de escuelas 
+
+
+// relación entre escuela y clase -> muchos a uno. 
+@OneToMany(()=>Clase,clases=>clases.escuela)
+clases:Clase[];
+
   // 2. constructor
   constructor(nombre: string, domicilio: string) {
-    nombre = this.nombre;
-    domicilio = this.domicilio; 
+   this.nombre=nombre;
+   this.domicilio=domicilio;
   }
   public getId(): number {  
     return this.id;
@@ -35,15 +46,5 @@ export class Escuela {
   }
 
 
-// relación entre escuela y ciudad -> muchos a uno
-
-  @ManyToOne(()=>Ciudad,ciudad=>ciudad.escuelas) // referencia a escuelas. Muchas escuelas pueden referenciar un elemento de ciudad
-  @JoinColumn({name: "id_ciudad"}) // esto es opcional, es para definir el nombre del atributo FK en la tabla que lo crea, en este caso Escuela contiene id ciudad como FK. 
-  ciudad:Ciudad;   // propiedad que permite la conexion entre tablas, tamb permite acceder al array de escuelas 
-
-
-  // relación entre escuela y clase -> muchos a uno. 
-@OneToMany(()=>Clase,clases=>clases.escuela)
-clases:Clase[];
 
 }
