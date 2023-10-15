@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Put,
+} from '@nestjs/common';
 import { ProfesorService } from './profesor.service';
 import { CreateProfesorDto } from './dto/create-profesor.dto';
 import { UpdateProfesorDto } from './dto/update-profesor.dto';
@@ -7,33 +16,34 @@ import { UpdateProfesorDto } from './dto/update-profesor.dto';
 export class ProfesorController {
   constructor(private readonly profesorService: ProfesorService) {}
 
-  @Post('crear-profesor')
-  create(@Body() createProfesorDto: CreateProfesorDto) {
-    return this.profesorService.create(createProfesorDto);
-  }
-@Post('agregar-domicilio')
-async addDomicilio(@Body() body:any):Promise<any> {
-  return this.profesorService.createDomicilio(body);
-}
-
-
-  @Get()
-  findAll() {
-    return this.profesorService.findAll();
+  //** CREATE  */
+  @Post('nuevo-profesor')
+  async create(@Body() createProfesorDto: CreateProfesorDto) {
+    return await this.profesorService.create(createProfesorDto);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.profesorService.findOne(+id);
+  @Post('agregar-domicilio')
+  async addDomicilio(@Body() body: any): Promise<any> {
+    return await this.profesorService.createDomicilio(body);
+  }
+  //**  READ   */
+  @Get('get-all')
+  async findAll() {
+    return await this.profesorService.findAll();
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProfesorDto: UpdateProfesorDto) {
-    return this.profesorService.update(+id, updateProfesorDto);
+//**  UPDATE   */
+  @Put('modificar-profesor/:id')
+  update(
+    @Param('id') id: number,
+    @Body() createProfesorDto: CreateProfesorDto,
+  ) {
+    return this.profesorService.update(createProfesorDto, id);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.profesorService.remove(+id);
+  //**   DELETE   */
+  @Delete('eliminar/:id')
+  async remove(@Param('id') id: number) {
+    return await this.profesorService.remove(id);
   }
 }
