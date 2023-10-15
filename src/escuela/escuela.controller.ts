@@ -1,34 +1,32 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { EscuelaService } from './escuela.service';
-import { CreateEscuelaDto } from './dto/create-escuela.dto';
-import { UpdateEscuelaDto } from './dto/update-escuela.dto';
+import { EscuelaDto } from './dto/escuela.dto';
 
 @Controller('escuela')
 export class EscuelaController {
   constructor(private readonly escuelaService: EscuelaService) {}
 
-  @Post()
-  create(@Body() createEscuelaDto: CreateEscuelaDto) {
-    return this.escuelaService.create(createEscuelaDto);
+//**   CREATE    */
+  @Post('new')
+  async create(@Body() escuelaDto: EscuelaDto):Promise<boolean> {
+    return await this.escuelaService.create(escuelaDto);
+  }
+ 
+  //**   READ    */
+  @Get('get-all')
+  async findAll():Promise<any>{
+    return await this.escuelaService.findAll();
   }
 
-  @Get()
-  findAll() {
-    return this.escuelaService.findAll();
+//**   UPDATE    */
+  @Put('modificar-escuela/:id')
+  update(@Param('id') id: number, @Body()EscuelaDto: EscuelaDto) {
+    return this.escuelaService.update( id, EscuelaDto);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.escuelaService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEscuelaDto: UpdateEscuelaDto) {
-    return this.escuelaService.update(+id, updateEscuelaDto);
-  }
-
+//**   DELETE    */
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.escuelaService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.escuelaService.remove(id);
   }
 }

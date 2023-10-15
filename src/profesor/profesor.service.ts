@@ -1,6 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateProfesorDto } from './dto/create-profesor.dto';
-import { UpdateProfesorDto } from './dto/update-profesor.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Profesor } from './entities/profesor.entity';
 import { FindOneOptions, Repository } from 'typeorm';
@@ -20,7 +19,6 @@ export class ProfesorService {
 
   //** CREATE */
   async create(CreateProfesorDto: CreateProfesorDto): Promise<boolean> {
-    // falta verificar si el profesor está o no en la bd
     try {
       let profesor: Profesor = await this.ciudadRepository.save(
         new Profesor(CreateProfesorDto.nombre, CreateProfesorDto.apellido),
