@@ -33,13 +33,6 @@ export class AsistenciaService {
     return this.asistenciaRepository.find();
   }
  
-  //   const asistencia_estudiante = await this.estudianteClaseRepository.findOne({
-  //     where: { claseId: claseId, estudianteId: estudianteId },
-  //   });
-  //   if (!asistencia_estudiante)
-  //   return 'no se encontró';
-  // return await this.asistenciaRepository.save(new Asistencia(claseId,estudianteId, fecha))
-
   async remove( asistenciaDto: AsistenciaDto) {
    try { const encontrarAsistencia = await this.asistenciaRepository.find({
       where:{
