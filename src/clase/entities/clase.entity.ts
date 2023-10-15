@@ -1,7 +1,8 @@
 import { Escuela } from "src/escuela/entities/escuela.entity";
+import { EstudianteClase } from "src/estudiante/entities/clase_estudiante.entity";
 import { Estudiante } from "src/estudiante/entities/estudiante.entity";
 import { Profesor } from "src/profesor/entities/profesor.entity";
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name:'clase'})
 export class Clase {
@@ -11,20 +12,25 @@ export class Clase {
     @Column()
     nombre: string;
 
-  //*** Relación entre clase y profesor -> muchos a uno: *** 
+  //*** Relación entre Clase y Profesor -> muchos a uno: *** 
   @ManyToOne(()=>Profesor,profesor=>profesor.clases)
   @JoinColumn({name: "fk_id_profesor"})
   profesor:Profesor;
 
-  //*** Relación entre clase y escuela -> muchos a uno: ***
+  //*** Relación entre Clase y Escuela -> muchos a uno: ***
   @ManyToOne(()=>Escuela,escuela=>escuela.clases)
-  @JoinColumn({name: "fk_id_clase"})
+  @JoinColumn({name: "fk_id_escuela"})
   escuela:Escuela
 
- //*** Relación entre clases y estudiantes -> muchos a muchos: ***
-@ManyToMany(()=>Estudiante,estudiantes=>estudiantes.clases)
-@JoinTable({name:"clase_estudiante"}) // JoinTable es obligatorio, el nombre es opcional. 
-estudiantes:Estudiante []; //<- array de estudiantes
+ //*** Relación entre Clase y Estudiante -> muchos a muchos: ***
+// @ManyToMany(()=>Estudiante,estudiantes=>estudiantes.clases)
+// @JoinTable({name:"clase_estudiante"}) // JoinTable es obligatorio, el nombre es opcional. 
+// estudiantes:Estudiante []; //<- array de estudiantes
+
+
+//** Relación de uno a muchos entre Clase y EstudianteClase */
+@OneToMany(()=>EstudianteClase,estudianteClases=>estudianteClases.clase)
+estudianteClases:EstudianteClase[];
 
 
     constructor(nombre: string) {
