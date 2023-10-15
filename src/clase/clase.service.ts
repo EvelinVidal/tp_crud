@@ -11,13 +11,14 @@ export class ClaseService {
     private claseRepository:Repository<Clase> 
     ){} 
 
+//**    CREATE    */
   async create(claseDto: Clase):Promise<boolean> {
     let clase : Clase = await this.claseRepository.save(new Clase(claseDto.nombre))
     if(clase)
       return true   
     return false;
   }
-
+//**   READ    */
   async findAll(): Promise<Clase[]> {
     return await this.claseRepository.find();
   }
@@ -31,6 +32,8 @@ export class ClaseService {
       return null;
   }
 
+
+  //**   UPDATE    */
   async update(id: number, claseDto: Clase):Promise<String> {
     const criterio : FindOneOptions = {where:{id:id}};
     let clase: Clase = await this.claseRepository.findOne(criterio);
@@ -47,6 +50,8 @@ export class ClaseService {
       return 'no se encontro clase';
   }
 
+
+  //**   DELETE    */
   async remove(id: number):Promise<boolean> {
     try{
       const criterio : FindOneOptions = {where:{id:id}};

@@ -39,7 +39,7 @@ export class ProfesorService {
   /** CREATE DOMICILIO, método delegado por Ciudad_profesor */
   async createDomicilio(body) {
     // verifico si existe el profesor:
-    const { ciudadId, profesorId, domicilio } = body; // vamos a desectructurar el body en variables diferentes.. esto ahorra escribir body.ciudadId,etc..
+    const { ciudadId, profesorId, domicilio } = body;
     const profesor = await this.profesorRepository.findOne({
       where: { id: profesorId },
     });

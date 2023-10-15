@@ -84,7 +84,7 @@ export class EstudianteService {
     else {
       let estudianteAnterior = estudiante.getNombre();
       estudiante.setNombre(EstudianteDto.nombre);
-      estudiante = await this.estudianteRepository.save(estudiante); // save se encarga de distinguir entre create y update. Tiene las dos funciones y reconoce cuando debe crear y cuando modificar un recurso por el tipo de petición.
+      estudiante = await this.estudianteRepository.save(estudiante); 
       return `ok - ${estudianteAnterior} --> ${EstudianteDto.nombre}`;
     }
   }
@@ -110,3 +110,4 @@ export class EstudianteService {
     }
   }
 }
+

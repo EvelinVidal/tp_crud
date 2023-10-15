@@ -1,34 +1,27 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { AsistenciaService } from './asistencia.service';
-import { CreateAsistenciaDto } from './dto/create-asistencia.dto';
-import { UpdateAsistenciaDto } from './dto/update-asistencia.dto';
+import { AsistenciaDto } from './dto/asistencia.dto';
 
 @Controller('asistencia')
 export class AsistenciaController {
   constructor(private readonly asistenciaService: AsistenciaService) {}
 
+//**   CREATE    */
   @Post('crear-asistencia')
- async create(@Body() createAsistenciaDto: CreateAsistenciaDto):Promise<any> {
-    return await this.asistenciaService.create(createAsistenciaDto);
+ async create(@Body() asistenciaDto: AsistenciaDto):Promise<any> {
+    return await this.asistenciaService.create(asistenciaDto);
   }
-
+//** READ    */
   @Get()
   findAll() {
     return this.asistenciaService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.asistenciaService.findOne(+id);
-  }
+//**   DELETE    */
+  @Delete('eliminar-asistencia')
+  
+  async remove(@Body() AsistenciaDto: AsistenciaDto) {
+     return await this.asistenciaService.remove(AsistenciaDto);
+   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAsistenciaDto: UpdateAsistenciaDto) {
-    return this.asistenciaService.update(+id, updateAsistenciaDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.asistenciaService.remove(+id);
-  }
 }
