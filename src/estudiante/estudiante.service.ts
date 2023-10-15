@@ -53,17 +53,12 @@ async addClase(body):Promise<any>{
   return  await this.estudianteClaseRepository.save(new EstudianteClase(estudianteId,claseId));
  }
 
-
   findAll() {
     return `This action returns all estudiante`;
   }
 
   findOne(id: number) {
     return `This action returns a #${id} estudiante`;
-  }
-
-  update(id: number, estudianteDto: EstudianteDto) {
-    return `This action updates a #${id} estudiante`;
   }
 
   remove(id: number) {

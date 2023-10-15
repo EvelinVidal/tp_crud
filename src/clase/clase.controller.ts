@@ -1,34 +1,34 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { ClaseService } from './clase.service';
-import { CreateClaseDto } from './dto/create-clase.dto';
-import { UpdateClaseDto } from './dto/update-clase.dto';
+import { Clase } from './entities/clase.entity';
 
 @Controller('clase')
 export class ClaseController {
   constructor(private readonly claseService: ClaseService) {}
+  //CRUD
 
-  @Post()
-  create(@Body() createClaseDto: CreateClaseDto) {
-    return this.claseService.create(createClaseDto);
+  //CREATE
+  @Post('crear')
+  async crearClase(@Body() clase:Clase): Promise<boolean>{
+    return await this.claseService.create(clase);
   }
-
-  @Get()
-  findAll() {
-    return this.claseService.findAll();
+  //READ
+  @Get('obtenerAll')
+  async buscarTodos(): Promise<Clase[]>{
+    return await this.claseService.findAll();
   }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.claseService.findOne(+id);
+  @Get('obtener/:id')
+  async buscarId(@Param('id') id:number) : Promise<Clase>{
+    return await this.claseService.findOne(id);
   }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateClaseDto: UpdateClaseDto) {
-    return this.claseService.update(+id, updateClaseDto);
+  //UPDATE
+  @Put('actualizar/:id')
+  async actualizarClase(@Body() clase:Clase,@Param('id')id:number ): Promise<String>{
+    return await this.claseService.update(id,clase);
   }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.claseService.remove(+id);
+  //DELETE
+  @Delete('eliminar/:id')
+  async eliminarClase(@Param('id') id:number):Promise<boolean> {
+    return await this.claseService.remove(id);
   }
 }
