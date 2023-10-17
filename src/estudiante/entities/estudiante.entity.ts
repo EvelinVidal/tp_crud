@@ -24,12 +24,11 @@ export class Estudiante {
 // @ManyToMany(()=>Clase,clases=>clases.estudiantes)
 // clases:Clase[]; // arreglo de clases 
 
-//** Relación uno a muchos de Estudiante y EstudianteClase */
+  //*****   Relación entre Estudiante y EstudianteClase ---> uno a muchos   *****/    
 @OneToMany(()=>EstudianteClase,estudianteClases=>estudianteClases.estudiante)
 estudianteClases:EstudianteClase[];
 
-
-//***Relación entre Estudiante y Ciudad -> muchos a muchos */
+//*****   Relación entre Estudiante y Ciudad ---> muchos a muchos   *****/    
 @ManyToMany(()=>Ciudad,ciudades=>ciudades.estudiantes)
 ciudad:Ciudad[];
 

@@ -17,7 +17,8 @@ export class EstudianteService {
     private estudianteClaseRepository: Repository<EstudianteClase>,
   ) {}
 
-  //**    CREATE   */
+  
+  //*****   CREATE   *****/
   async create(estudianteDto: EstudianteDto) {
     // const fechaActual = new Date() -> puedo obtener la fecha actual y usarla como parametro en la creación de estudiante. new Estudiante (..., fechaActual)
     // const estudiante=new Estudiante(estudianteDto.nombre, estudianteDto.apellido, estudianteDto.fecha_nacimiento)
@@ -33,19 +34,8 @@ export class EstudianteService {
     else return 'no se pudo crear el estudiante ';
   }
 
-  //   async createConRelacion(estudianteDto:EstudianteDto):Promise<boolean>{
-  //    const clase:Clase = await this.claseRepository.findOne({where: {id:1}})  //consultar si existe la clase x, para eso inyectamos la clase --> linea 13
-  //    const estudiante = new Estudiante(estudianteDto.nombre, estudianteDto.apellido, estudianteDto.fecha_nacimiento) // -> creo el estudiante
-  //     if (clase)
-  //      estudiante.clases = [clase];  //le asignamos la clase al estudiante.
-  //     await this.estudianteRepository.save(estudiante) // guardo el estudiante.
-  //      if(estudiante)
-  // return true
-  // else
-  //     return false;
-  //   }
 
-  //** ADD CLASE */
+  //*****   ADD CLASE   *****/
   async addClase(body): Promise<any> {
     const { claseId, estudianteId } = body;
     const estudiante = await this.estudianteRepository.findOne({
@@ -66,14 +56,14 @@ export class EstudianteService {
     );
   }
 
-  //**    READ    */
+
+  //*****   READ   *****/
   async findAll(): Promise<any> {
     return await this.estudianteRepository.find();
   }
 
-  
-  //**   UPDATE   */
 
+  //*****   UPDATE   *****/
   async update(EstudianteDto: EstudianteDto, id: number): Promise<string> {
     const findEstudiante: FindOneOptions = { where: { id: id } };
     let estudiante: Estudiante = await this.estudianteRepository.findOne(
@@ -84,12 +74,13 @@ export class EstudianteService {
     else {
       let estudianteAnterior = estudiante.getNombre();
       estudiante.setNombre(EstudianteDto.nombre);
-      estudiante = await this.estudianteRepository.save(estudiante); 
+      estudiante = await this.estudianteRepository.save(estudiante);
       return `ok - ${estudianteAnterior} --> ${EstudianteDto.nombre}`;
     }
   }
 
-  //**   DELETE   */
+
+  //*****   DELETE   *****/
   async remove(id: number) {
     try {
       const aux: FindOneOptions = { where: { id: id } };
@@ -109,5 +100,15 @@ export class EstudianteService {
       );
     }
   }
+  //   async createConRelacion(estudianteDto:EstudianteDto):Promise<boolean>{
+  //    const clase:Clase = await this.claseRepository.findOne({where: {id:1}})  //consultar si existe la clase x, para eso inyectamos la clase --> linea 13
+  //    const estudiante = new Estudiante(estudianteDto.nombre, estudianteDto.apellido, estudianteDto.fecha_nacimiento) // -> creo el estudiante
+  //     if (clase)
+  //      estudiante.clases = [clase];  //le asignamos la clase al estudiante.
+  //     await this.estudianteRepository.save(estudiante) // guardo el estudiante.
+  //      if(estudiante)
+  // return true
+  // else
+  //     return false;
+  //   }
 }
-

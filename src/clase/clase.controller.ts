@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
 import { ClaseService } from './clase.service';
 import { Clase } from './entities/clase.entity';
 
@@ -6,12 +6,13 @@ import { Clase } from './entities/clase.entity';
 export class ClaseController {
   constructor(private readonly claseService: ClaseService) {}
 
-  //**   CREATE    */
+  //*****   CREATE   *****/
   @Post('crear')
   async crearClase(@Body() clase:Clase): Promise<boolean>{
     return await this.claseService.create(clase);
   }
-  //**   READ    */
+
+  //*****   READ   *****/
   @Get('obtenerAll')
   async buscarTodos(): Promise<Clase[]>{
     return await this.claseService.findAll();
@@ -20,12 +21,14 @@ export class ClaseController {
   async buscarId(@Param('id') id:number) : Promise<Clase>{
     return await this.claseService.findOne(id);
   }
-  //**   UPDATE    */
+
+  //*****   UPDATE   *****/
   @Put('actualizar/:id')
   async actualizarClase(@Body() clase:Clase,@Param('id')id:number ): Promise<String>{
     return await this.claseService.update(id,clase);
   }
-  //**   DELETE    */
+  
+  //*****   DELETE   *****/
   @Delete('eliminar/:id')
   async eliminarClase(@Param('id') id:number):Promise<boolean> {
     return await this.claseService.remove(id);

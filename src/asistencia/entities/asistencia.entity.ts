@@ -1,13 +1,5 @@
-import { Clase } from 'src/clase/entities/clase.entity';
 import { EstudianteClase } from 'src/estudiante/entities/clase_estudiante.entity';
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryColumn,
-} from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 
 @Entity({ name: 'asistencia' })
 export class Asistencia {
@@ -20,11 +12,10 @@ export class Asistencia {
   @Column()
   fecha: Date;
 
-  //** relacion uno a muchos con Estudiante */
+  /*****   Relación entre Asistencia y EstudianteClase ---> uno a muchos  *****/
   @ManyToOne(
     () => EstudianteClase,
-    (estudianteClase) => estudianteClase.asistencias,
-  )
+    (estudianteClase) => estudianteClase.asistencias)
   @JoinColumn()
   estudianteClase: EstudianteClase;
 

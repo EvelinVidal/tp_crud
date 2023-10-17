@@ -13,20 +13,18 @@ nombre:string;
 @Column()
 apellido:string;
 
-// relación entre Profesor y Clase -> uno a muchos; Un profesor puede tener varias clases. 
-@OneToMany(()=>Clase,clases=>clases.profesor)
+  //*****   Relación entre Profesor y Clase ---> uno a muchos  *****/    un profesor puede tener varias clases*/
+  @OneToMany(()=>Clase,clases=>clases.profesor)
 clases:Clase[]
 
-// relación entre profesor y domicilioProfesor:
+  //*****   Relación entre Profesor y Ciudad_profesor ---> uno a muchos  *****/ 
 @OneToMany(()=>Ciudad_profesor,domicilios=>domicilios.profesor)
 domicilios:Ciudad_profesor[];
-
 
 constructor(nombre:string, apellido:string){
     this.nombre = nombre;
     this.apellido = apellido;
 }
-
 public getId(): number {
     return this.id;
   }
@@ -42,6 +40,4 @@ public getId(): number {
   public setApellido(apellido: string) {
     this.apellido = apellido;
   }
-
-
 }

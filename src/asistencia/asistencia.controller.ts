@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
 import { AsistenciaService } from './asistencia.service';
 import { AsistenciaDto } from './dto/asistencia.dto';
 
@@ -6,22 +6,20 @@ import { AsistenciaDto } from './dto/asistencia.dto';
 export class AsistenciaController {
   constructor(private readonly asistenciaService: AsistenciaService) {}
 
-//**   CREATE    */
+  //*****   CREATE   *****/
   @Post('crear-asistencia')
- async create(@Body() asistenciaDto: AsistenciaDto):Promise<any> {
+  async create(@Body() asistenciaDto: AsistenciaDto): Promise<any> {
     return await this.asistenciaService.create(asistenciaDto);
   }
-//** READ    */
+  //*****   READ   *****/
   @Get()
   findAll() {
     return this.asistenciaService.findAll();
   }
 
-//**   DELETE    */
+  //*****   DELETE   *****/
   @Delete('eliminar-asistencia')
-  
   async remove(@Body() AsistenciaDto: AsistenciaDto) {
-     return await this.asistenciaService.remove(AsistenciaDto);
-   }
-
+    return await this.asistenciaService.remove(AsistenciaDto);
+  }
 }

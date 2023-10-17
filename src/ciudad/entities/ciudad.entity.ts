@@ -21,6 +21,7 @@ public escuelas:Escuela[]; // creamos propiedad de la escuela. Tiene un array de
 @JoinTable({name:"ciudad_estudiante"})
 estudiantes:Estudiante[];
 
+//*****   Relación uno a muchos con ciudad_profesor   *****/
 @OneToMany(()=>Ciudad_profesor,domicilios=>domicilios.ciudad)
 domicilios:Ciudad_profesor[];
 

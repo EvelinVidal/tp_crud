@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Delete,
-  Put,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
 import { ProfesorService } from './profesor.service';
 import { CreateProfesorDto } from './dto/create-profesor.dto';
 
@@ -14,7 +6,7 @@ import { CreateProfesorDto } from './dto/create-profesor.dto';
 export class ProfesorController {
   constructor(private readonly profesorService: ProfesorService) {}
 
-  //** CREATE  */
+  //*****   CREATE   *****/
   @Post('nuevo-profesor')
   async create(@Body() createProfesorDto: CreateProfesorDto) {
     return await this.profesorService.create(createProfesorDto);
@@ -24,13 +16,13 @@ export class ProfesorController {
   async addDomicilio(@Body() body: any): Promise<any> {
     return await this.profesorService.createDomicilio(body);
   }
-  //**  READ   */
+  //*****   READ   *****/
   @Get('get-all')
   async findAll() {
     return await this.profesorService.findAll();
   }
 
-//**  UPDATE   */
+  //*****   UPDATE   *****/
   @Put('modificar-profesor/:id')
   update(
     @Param('id') id: number,
@@ -39,7 +31,7 @@ export class ProfesorController {
     return this.profesorService.update(createProfesorDto, id);
   }
 
-  //**   DELETE   */
+  //*****   DELETE   *****/
   @Delete('eliminar/:id')
   async remove(@Param('id') id: number) {
     return await this.profesorService.remove(id);
